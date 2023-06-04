@@ -100,6 +100,11 @@ class Node:
         self.grad = 1
         for node in nodes:
             node.backward_prop()
+    
+    def zero_grad(self):
+        nodes = self.topo_sort()
+        for node in nodes:
+            node.grad = 0
 
     def draw_graph(self):
         nodes, edges = self.topo_sort(collect_edges = True)
