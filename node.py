@@ -22,7 +22,7 @@ class Node:
         def _backward_prop():
             self.grad += output.grad * 1
             other.grad += output.grad * (-1)
-        self.backward_prop = _backward_prop
+        output.backward_prop = _backward_prop
         return output
     
     def __rsub__(self,other):
@@ -36,7 +36,7 @@ class Node:
         def _backward_prop():
             self.grad += output.grad * 1
             other.grad += output.grad * 1
-        self.backward_prop = _backward_prop
+        output.backward_prop = _backward_prop
         return output
     
     def __radd__(self,other):
@@ -50,7 +50,7 @@ class Node:
         def _backward_prop():
             self.grad += output.grad * other.val
             other.grad += output.grad * self.val
-        self.backward_prop = _backward_prop
+        output.backward_prop = _backward_prop
         return output
     
     def __rmul__(self,other):
@@ -64,7 +64,7 @@ class Node:
         output = Node(val=self.val**exponent,children=[self],op=f'pow {exponent}')
         def _backward_prop():
             self.grad += (output.grad * (exponent*(self.val)**(exponent-1)))
-        self.backward_prop= _backward_prop
+        output.backward_prop= _backward_prop
         return output
     
     def __eq__(self,other):
